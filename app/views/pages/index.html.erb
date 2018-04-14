@@ -1,25 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Pages</h1>
+<h2>Sponsored pages</h2>
+<ul class="list-group">
+  <% @pages.each do |page| %>
+    <li class="list-group-item">
+      <h2>
+        <% if page.ad_visible %>
+          <%= link_to "#{page.user.username.pluralize} links (Sponsor)" , page_path(page),
+            class: "list-group-item list-group-item-action"
+          %>
+        <% else %>
+          <%= link_to "#{page.user.username.pluralize} links" , page_path(page),
+            class: "list-group-item list-group-item-action"
+          %>
+        <% end %>
+      </h2>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pages.each do |page| %>
-      <tr>
-        <td><%= link_to 'Show', page %></td>
-        <td><%= link_to 'Edit', edit_page_path(page) %></td>
-        <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+      <%if user_signed_in? && current_user.authorisation >= 30%>
+        <tr>
+          <td><%= link_to 'Show', page %></td>
+          <td><%= link_to 'Edit', edit_page_path(page) %></td>
+          <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <li>
+  <% end %>
+</ul>
 <br>
-
-<%= link_to 'New Page', new_page_path %>

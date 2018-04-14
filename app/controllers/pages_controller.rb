@@ -26,7 +26,7 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = current_user.build_page(page_params)
+    @page = current_user.create_page(page_params)
 
     respond_to do |format|
       if @page.save
@@ -71,6 +71,6 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.fetch(:page, {})
+      params.require(:page).permit(:bio, :banner_url, :background_url, :background_color, :button_background_url, :button_background_color, :ad_visible)
     end
 end

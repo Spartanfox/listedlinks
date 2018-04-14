@@ -14,34 +14,34 @@
   <div class="container">
     <%= link_to "Spartanfox Productions", root_path, id: "logo" %>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
-            <% if user_signed_in? %>
-                Logged in as <strong><%= current_user.username %></strong>
-              <%end%>
+      <ul class="nav navbar-nav navbar-right" style="font-size:200%;">
+        <% if user_signed_in? %>
+          Logged in as <strong><%= current_user.username %></strong>
+        <%end%>
       </ul>
     </nav>
   </div>
   <div class="container">
     <nav>
-      <ul class="nav navbar-nav navbar-left">
+      <ul class="nav navbar-nav navbar-left" style="font-size:300%;">
         <li><%= link_to 'Home', home_url%></li>
         <% if user_signed_in? %>
           <% if current_user.page %>
-            <li><%= link_to 'My page', home_url%></li>
+            <li><%= link_to 'My page', page_path(current_user.page)%></li>
           <% else %>
             <li><%= link_to 'New Page', new_page_path%></li>
           <% end %>
         <% end %>
-        <li><%= link_to 'Games', home_url%></li>
-        <li><%= link_to 'Contact', home_url%></li>
+        <li><%= link_to 'Pages', pages_path%></li>
+        <li><%= link_to 'Games', "https://play.google.com/store/apps/details?id=com.spartanfox.blocktoidz&hl=en"%></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" style="font-size:300%;">
         <%if user_signed_in?%>
           <li><%= link_to 'Edit profile', edit_user_registration_path%></li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete%></li>
         <%else%>
-          <li><%= link_to "Sign up", new_user_registration_path%></li>
-          <li><%= link_to "Login"  , new_user_session_path     %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+          <li><%= link_to "Login"  , new_user_session_path      %></li>
         <%end%>
       </ul>
     </nav>
