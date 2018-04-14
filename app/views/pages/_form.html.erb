@@ -1,0 +1,24 @@
+
+<%= simple_form_for(@page) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <%= f.input :bio, label: 'Bio' %>
+
+    <%= f.input :banner_url, label: 'Banner url' %>
+
+    <%= f.input :background_url  , label: 'Background url'  %>
+    <%= f.input :background_color, label: 'Background color'%>
+
+    <%= f.input :button_background_url  , label: 'Button background url' %>
+    <%= f.input :button_background_color, label: 'Button background color' %>
+
+    <%= f.input :ad_visible, label: 'blocktoidz visible' %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
