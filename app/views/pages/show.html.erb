@@ -9,6 +9,6 @@ button color: <%= @page.button_background_color%><br>
 button url: <%= @page.button_background_url%><br>
 supporter: <%= @page.ad_visible%><br>
 </h2>
-<% if @page.user == current_user || (user_signed_in? && current_user.authorization >=30)%>
+<% if @page.user == current_user || (user_signed_in? && current_user.authorisation >=30)%>
   <%= link_to 'Edit', edit_page_path(@page) %>
 <% end %>
