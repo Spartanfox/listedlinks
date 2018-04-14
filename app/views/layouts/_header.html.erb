@@ -14,7 +14,7 @@
   <div class="container">
     <%= link_to "Spartanfox Productions", root_path, id: "logo" %>
     <nav>
-      <ul class="nav navbar-nav navbar-right" style="font-size:200%;">
+      <ul class="nav navbar-nav navbar-right" style="font-size:1em;">
         <% if user_signed_in? %>
           Logged in as <strong><%= current_user.username %></strong>
         <%end%>
@@ -23,19 +23,27 @@
   </div>
   <div class="container">
     <nav>
-      <ul class="nav navbar-nav navbar-left" style="font-size:200%;">
-        <li><%= link_to 'Home', home_url%></li>
+      <ul class="nav navbar-nav navbar-left" style="font-size:1em;">
+        <li class="<%= current_page?(home_path    )? "active" : "" %>">
+          <%= link_to "Home", home_path %>
+        </li>
         <% if user_signed_in? %>
           <% if current_user.page %>
-            <li><%= link_to 'My page', page_path(current_user.page)%></li>
+            <li class="<%= current_page?(page_path(current_user.page))? "active" : "" %>">
+              <%= link_to "My Page", page_path(current_user.page) %>
+            </li>
           <% else %>
-            <li><%= link_to 'New Page', new_page_path%></li>
+            <li class="<%= current_page?(new_page_path)? "active" : "" %>">
+              <%= link_to "New Page", new_page_path %>
+            </li>
           <% end %>
         <% end %>
-        <li><%= link_to 'Pages', pages_path%></li>
+        <li class="<%= current_page?(pages_path)? "active" : "" %>">
+          <%= link_to "Pages", pages_path %>
+        </li>
         <li><%= link_to 'Games', "https://play.google.com/store/apps/details?id=com.spartanfox.blocktoidz&hl=en"%></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right" style="font-size:200%;">
+      <ul class="nav navbar-nav navbar-right" style="font-size:1em;">
         <%if user_signed_in?%>
           <li><%= link_to 'Edit profile', edit_user_registration_path%></li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete%></li>
