@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Sponsored pages</h2>
+<h2>User pages</h2>
 <ul class="list-group">
   <% @pages.each do |page| %>
     <li class="list-group-item">
       <h2>
         <% if page.ad_visible %>
-          <%= link_to "#{page.user.username.pluralize} links (Sponsor)" , page_path(page),
+          <%= link_to "#{page.user.username.pluralize} links (Supporter)" , page_path(page),
             class: "list-group-item list-group-item-action"
           %>
         <% else %>
@@ -23,7 +23,7 @@
           <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
-    <li>
+    </li>
   <% end %>
 </ul>
 <br>

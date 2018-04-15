@@ -22,7 +22,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
-    if current_user.page != @page
+    if current_user.page != @page && current_user.authorisation < 30
       redirect_to(root_path)
     end
   end
@@ -46,6 +46,9 @@ class PagesController < ApplicationController
   # PATCH/PUT /pages/1
   # PATCH/PUT /pages/1.json
   def update
+    if current_user.page != @page && current_user.authorisation < 30
+      redirect_to(root_path)
+    end
     respond_to do |format|
       if @page.update(page_params)
         format.html { redirect_to @page, notice: 'Page was successfully updated.' }

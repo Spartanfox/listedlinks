@@ -16,14 +16,14 @@ class LinksController < ApplicationController
   def new
     @page = Page.find(params[:page_id])
     @link = @page.links.new
-    if current_user.page != @page
+    if current_user.page != @page && current_user.authorisation < 30
       redirect_to(root_path)
     end
   end
 
   # GET /links/1/edit
   def edit
-    if current_user.page != @page
+    if current_user.page != @page && current_user.authorisation < 30
       redirect_to(root_path)
     end
   end
@@ -32,8 +32,8 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @page = Page.find(params[:page_id])
-    unless (current_user.page == @page)
-      redirect_to root_path
+    if current_user.page != @page && current_user.authorisation < 30
+      redirect_to(root_path)
     end
     @link = @page.links.new(link_params)
 

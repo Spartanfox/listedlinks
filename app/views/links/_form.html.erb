@@ -3,7 +3,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :slug, label: 'Priority (Links are sorted by largest numbers first)' %>
+    <%= f.input :slug, collection: 0..10, selected: @link.slug, label: 'Priority (Links are sorted by largest numbers first)' %>
     <%= f.input :name, label: 'Link name' %>
     <%= f.input :link, label: 'Link URL' %>
   </div>
