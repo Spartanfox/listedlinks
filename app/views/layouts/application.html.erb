@@ -7,14 +7,37 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-    <%= render 'layouts/header' %>
-    <div class="container" style="padding-top:120px">
-      <div class="center jumbotron">
-        <%= yield %>
+  <% if link_page_visible? && valid_image?(@page.background_url) %>
+    <body background="http://tinyimg.io/i/<%= @page.background_url %>">
+  <% else %>
+    <body>
+  <% end %>
+    <header class="navbar-fixed-top">
+      <div class="container">
+        <nav>
+          <% if notice %>
+              <p class="alert alert-success"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+              <p class="alert alert-danger"><%= alert %></p>
+          <% end %>
+        </nav>
+      <div>
+    </header >
+    <% unless link_page_visible? %>
+      <%= render 'layouts/header' %>
+      <div class="container" style="padding-top:10px">
+        <div class="center jumbotron">
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
+      <div class="container" style="padding-top:10px">
+        <div class="center jumbotron">
+          <%= yield %>
+        </div>
       </div>
       <%= render 'layouts/footer' %>
-    </div>
+    <% end %>
   </body>
 </html>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413080648) do
+ActiveRecord::Schema.define(version: 20180415100643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180413080648) do
     t.integer "unique_clicks", default: 0
     t.integer "unique_daily_clicks", default: 0
     t.bigint "page_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["page_id"], name: "index_links_on_page_id"
   end
 
@@ -37,6 +39,8 @@ ActiveRecord::Schema.define(version: 20180413080648) do
     t.boolean "ad_visible", default: true
     t.bigint "user_id"
     t.integer "reports"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 

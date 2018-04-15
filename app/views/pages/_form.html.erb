@@ -6,13 +6,14 @@
 
     <%= f.input :bio, label: 'Bio' %>
 
-    <%= f.input :banner_url, label: 'Banner url' %>
-
-    <%= f.input :background_url  , label: 'Background url'  %>
     <%= f.input :background_color, label: 'Background color'%>
 
-    <%= f.input :button_background_url  , label: 'Button background url' %>
     <%= f.input :button_background_color, label: 'Button background color' %>
+
+    <p>Upload an image to <%= link_to 'tinyimg', 'https://tinyimg.io/'%> then paste the image name in here for a custom background and buttons</p>
+    <%= f.input :banner_url, label: 'Banner url', placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11 } %>
+    <%= f.input :background_url  , label: 'Background url', placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11 }  %>
+    <%= f.input :button_background_url  , label: 'Button background url', placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11 } %>
     <div class="container">
       <p>
         You can help support the website by allowing users to see my game
@@ -22,7 +23,7 @@
         as supporters
       </p>
   </div>
-    <%= f.input :ad_visible, label: 'blocktoidz visible' %>
+    <%= f.input :ad_visible, label: 'Supporter' %>
 
   </div>
 

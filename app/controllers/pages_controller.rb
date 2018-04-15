@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
-  before_action only: [:new,:create] do
+  before_action only: [:edit,:new,:create] do
     redirect_back(fallback_location: root_path, alert: "You need to be signed in to create a page") unless user_signed_in?
   end
   # GET /pages
@@ -12,6 +12,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
+    @page_visible = true
   end
 
   # GET /pages/new
@@ -21,6 +22,9 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
+    if current_user.page != @page
+      redirect_to(root_path)
+    end
   end
 
   # POST /pages

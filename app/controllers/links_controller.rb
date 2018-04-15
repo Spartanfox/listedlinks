@@ -14,22 +14,33 @@ class LinksController < ApplicationController
 
   # GET /links/new
   def new
-    @link = Link.new
+    @page = Page.find(params[:page_id])
+    @link = @page.links.new
+    if current_user.page != @page
+      redirect_to(root_path)
+    end
   end
 
   # GET /links/1/edit
   def edit
+    if current_user.page != @page
+      redirect_to(root_path)
+    end
   end
 
   # POST /links
   # POST /links.json
   def create
-    @link = Link.new(link_params)
+    @page = Page.find(params[:page_id])
+    unless (current_user.page == @page)
+      redirect_to root_path
+    end
+    @link = @page.links.new(link_params)
 
     respond_to do |format|
       if @link.save
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
-        format.json { render :show, status: :created, location: @link }
+        format.html { redirect_to @page, notice: 'Link was successfully created.' }
+        format.json { render :show, status: :created, location: @page }
       else
         format.html { render :new }
         format.json { render json: @link.errors, status: :unprocessable_entity }
@@ -42,8 +53,8 @@ class LinksController < ApplicationController
   def update
     respond_to do |format|
       if @link.update(link_params)
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
-        format.json { render :show, status: :ok, location: @link }
+        format.html { redirect_to page_path(@page), notice: 'Link was successfully updated.' }
+        format.json { render :show, status: :ok, location: @pahe }
       else
         format.html { render :edit }
         format.json { render json: @link.errors, status: :unprocessable_entity }
@@ -56,7 +67,7 @@ class LinksController < ApplicationController
   def destroy
     @link.destroy
     respond_to do |format|
-      format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
+      format.html { redirect_to @page, notice: 'Link was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,11 +75,13 @@ class LinksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
-      @link = Link.find(params[:id])
+      @page = Page.find(params[:page_id])
+      @link = @page.links.find(params[:id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.fetch(:link, {})
+      params.require(:link).permit(:name, :link,:slug)
     end
 end

@@ -1,6 +1,17 @@
 <h1>Editing Link</h1>
 
-<%= render 'form', link: @link %>
+  <%= simple_form_for [@page, @link], url: page_link_path  do |f| %>
+    <%= f.error_notification %>
+    <h2>
+    <div class="form-inputs">
+      <%= f.input :slug, collection: 0..10, selected: @link.slug, label: 'Priority (Links are sorted by largest numbers first)' %>
+      <%= f.input :name, label: 'Link name' %>
+      <%= f.input :link, label: 'Link URL' %>
+    </div>
+</h2>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
 
-<%= link_to 'Show', @link %> |
-<%= link_to 'Back', links_path %>
+<%= link_to 'Back', page_path(@page) %>

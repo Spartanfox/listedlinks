@@ -1,36 +1,32 @@
-<header class="navbar-fixed-top" style="padding-top:120px">
-  <div class="container">
-    <nav>
-      <% if notice %>
-          <p class="alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-          <p class="alert alert-danger"><%= alert %></p>
-      <% end %>
-    </nav>
-  <div>
-</header >
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-inverse">
   <div class="container">
     <%= link_to "Spartanfox Productions", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right" style="font-size:200%;">
         <% if user_signed_in? %>
+        <div style="color: #EEE;">
           Logged in as <strong><%= current_user.username %></strong>
+          <div>
         <%end%>
       </ul>
     </nav>
   </div>
   <div class="container">
     <nav>
-      <ul class="nav navbar-nav navbar-left" style="font-size:200%;">
-        <li class="<%= current_page?(home_path    )? "active" : "" %>">
-          <%= link_to "Home", home_path %>
+      <ul class="nav navbar-nav navbar-left" style="font-size:400%;">
+
+        <li class="<%= current_page?(home_path)? "active" : "" %>">
+          <%#= link_to "Home", home_path %>
         </li>
+
         <% if user_signed_in? %>
           <% if current_user.page %>
-            <li class="<%= current_page?(page_path(current_user.page))? "active" : "" %>">
-              <%= link_to "My Page", page_path(current_user.page) %>
+            <li>
+            <% if link_page_visible? && @page == current_user.page %>
+              <%= link_to "Edit Page", edit_page_path(current_user.page) %>
+            <% else %>
+              <%= link_to "My Page", current_user.page %>
+            <% end %>
             </li>
           <% else %>
             <li class="<%= current_page?(new_page_path)? "active" : "" %>">
@@ -43,7 +39,7 @@
         </li>
         <li><%= link_to 'Games', "https://play.google.com/store/apps/details?id=com.spartanfox.blocktoidz&hl=en"%></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right" style="font-size:200%;">
+      <ul class="nav navbar-nav navbar-right" style="font-size:400%;">
         <%if user_signed_in?%>
           <li><%= link_to 'Edit profile', edit_user_registration_path%></li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete%></li>
