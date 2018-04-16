@@ -3,31 +3,27 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <h2>
+      <%= f.input :bio, input_html:{class:"input-lg"}%>
+      <%= f.input :background_color, input_html:{class:"input-lg"}, label: 'Background color'%>
 
-    <%= f.input :bio, label: 'Bio' %>
+      <%= f.input :button_background_color, input_html:{class:"input-lg"}, label: 'Button background color' %>
 
-    <%= f.input :background_color, label: 'Background color'%>
-
-    <%= f.input :button_background_color, label: 'Button background color' %>
-
-    <p>Upload an image to <%= link_to 'tinyimg', 'https://tinyimg.io/'%> then paste the image name in here for a custom background and buttons</p>
-    <%= f.input :banner_url, label: 'Banner url', placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11 } %>
-    <%= f.input :background_url  , label: 'Background url', placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11 }  %>
-    <%= f.input :button_background_url  , label: 'Button background url', placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11 } %>
-    <div class="container">
-      <p>
-        You can help support the website by allowing users to see my game
-      </p>
-      <p>
-        Users who choose to keep this option on will be first on the list of pages
-        as supporters
-      </p>
+      Upload an image to <%= link_to 'tinyimg', 'https://tinyimg.io/'%> then paste the image name in here for a custom background and buttons
+      <%= f.input :banner_url           , label: 'Banner url'           , placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11,class:"input-lg" } %>
+      <%= f.input :background_url       , label: 'Background url'       , placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11,class:"input-lg" }  %>
+      <%#= f.input :button_background_url, label: 'Button background url', placeholder: 'aaaaaaa.jpg', input_html: { maxlength: 12, minlength: 11,class:"input-lg" } %>
+      You can help support the website by allowing users to see my game
+      <br>
+      <br>
+      Users who choose to keep this option on will be first on the list of pages as supporters
+      <%= f.input :ad_visible, input_html:{class:"input-lg"}, label: 'Supporter' %>
+    </h2>
   </div>
-    <%= f.input :ad_visible, label: 'Supporter' %>
-
-  </div>
-
+<br>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class:"btn btn-lg btn-primary"  %>
+
   </div>
+  <br>
 <% end %>

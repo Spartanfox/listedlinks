@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head name="viewport" content="width=device-width, initial-scale=2">
     <title>Listedlinks</title>
     <%= csrf_meta_tags %>
 
@@ -24,6 +24,8 @@
         </nav>
       <div>
     </header >
+    <big>
+      <strong>
     <% unless link_page_visible? %>
       <%= render 'layouts/header' %>
       <div class="container" style="padding-top:10px">
@@ -33,11 +35,11 @@
       </div>
     <% else %>
       <div class="container" style="padding-top:10px">
-        <div class="center jumbotron">
           <%= yield %>
-        </div>
       </div>
       <%= render 'layouts/footer' %>
     <% end %>
+  </strong>
+  </big>
   </body>
 </html>

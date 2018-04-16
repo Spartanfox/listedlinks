@@ -1,24 +1,7 @@
 <header class="navbar navbar-inverse">
   <div class="container">
-    <%= link_to "Spartanfox Productions", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right" style="font-size:200%;">
-        <% if user_signed_in? %>
-        <div style="color: #EEE;">
-          Logged in as <strong><%= current_user.username %></strong>
-          <div>
-        <%end%>
-      </ul>
-    </nav>
-  </div>
-  <div class="container">
     <nav>
       <ul class="nav navbar-nav navbar-left" style="font-size:300%;">
-
-        <li class="<%= current_page?(home_path)? "active" : "" %>">
-          <%#= link_to "Home", home_path %>
-        </li>
-
         <% if user_signed_in? %>
           <% if current_user.page %>
             <li>
@@ -38,15 +21,6 @@
           <%= link_to "Pages", pages_path %>
         </li>
         <li><%= link_to 'Games', "https://play.google.com/store/apps/details?id=com.spartanfox.blocktoidz&hl=en"%></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right" style="font-size:300%;">
-        <%if user_signed_in?%>
-          <li><%= link_to 'Edit profile', edit_user_registration_path%></li>
-          <li><%= link_to "Logout", destroy_user_session_path, method: :delete%></li>
-        <%else%>
-          <li><%= link_to "Sign up", new_user_registration_path %></li>
-          <li><%= link_to "Login"  , new_user_session_path      %></li>
-        <%end%>
       </ul>
     </nav>
   </div>

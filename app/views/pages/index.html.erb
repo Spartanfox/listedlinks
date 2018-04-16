@@ -2,18 +2,12 @@
 
 <h2>User pages</h2>
 <ul class="list-group">
-  <% @pages.each do |page| %>
+  <% @pages.where(ad_visible:true).each do |page| %>
     <li class="list-group-item">
       <h2>
-        <% if page.ad_visible %>
-          <%= link_to "#{page.user.username.pluralize} links (Supporter)" , page_path(page),
-            class: "list-group-item list-group-item-action"
-          %>
-        <% else %>
-          <%= link_to "#{page.user.username.pluralize} links" , page_path(page),
-            class: "list-group-item list-group-item-action"
-          %>
-        <% end %>
+        <%= link_to "#{page.user.username.pluralize} links" , page_path(page),
+          class: "list-group-item list-group-item-action"
+        %>
       </h2>
 
       <%if user_signed_in? && current_user.authorisation >= 30%>

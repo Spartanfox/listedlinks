@@ -1,31 +1,33 @@
 <center>
-  <% if valid_image?(@page.banner_url)%>
-      <img src="http://tinyimg.io/i/<%= @page.banner_url %>" class="img-thumbnail" style="width:20%">
-  <% end %>
-  <h1><%=@page.user.username%></h1>
-  <h2>
-    <p><%=simple_format(@page.bio)%></p>
-  </h2>
-  <% @page.links.sort_by {|l,a| [ -l.slug, l.created_at] }.each do |link| %>
-    <a href="<%= link.link %>" class="btn btn-primary btn-lg btn-block">
-      <%= link.name %>
-    </a>
-    <div>
-      <% if @page.user == current_user || (user_signed_in? && current_user.authorisation >=30)%>
-        <%= link_to 'Edit link', edit_page_link_path(@page,link) %> |
-        <%= link_to 'Delete ', [@page,link], method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    </div>
-    <br>
-  <% end %>
-  <% if @page.ad_visible %>
-    <a href="https://play.google.com/store/apps/details?id=com.spartanfox.blocktoidz&hl=en" class="btn btn-primary btn-lg btn-block">Blocktoidz</a>
-    <br>
-  <% end %>
-</center>
-<% if @page.user == current_user || (user_signed_in? && current_user.authorisation >=30)%>
-  <%= link_to 'Edit', edit_page_path(@page), class: "btn btn-default" %>
-  <%if @page.links.length<10%>
-    <%= link_to 'Add link', new_page_link_path(@page), class: "btn btn-default" %>
-  <%end%>
-<% end %>
+  <div class="center jumbotron">
+    <% if valid_image?(@page.banner_url)%>
+        <img src="http://tinyimg.io/i/<%= @page.banner_url %>" class="img-thumbnail" style="width:20%">
+    <% end %>
+    <h1><%=@page.user.username%></h1>
+    <%=simple_format @page.bio, {}, wrapper_tag: 'h2'%>
+    <% if @page.user == current_user || (user_signed_in? && current_user.authorisation >=30)%>
+      <%= link_to 'Edit', edit_page_path(@page), class: "btn btn-lg btn-info" %>
+      <%if @page.links.length<10%>
+        <%= link_to 'Add link', new_page_link_path(@page), class: "btn btn-lg btn-info" %>
+      <%end%>
+      <br><br>
+    <% end %>
+
+    <% @page.links.sort_by {|l| [ -l.slug, l.created_at] }.each do |link| %>
+      <div class="btn-group btn-group-lg btn-group-justified">
+        <a href="<%= link.link %>" class="btn btn-primary btn-block">
+          <%= link.name %>
+        </a>
+        <% if @page.user == current_user || (user_signed_in? && current_user.authorisation >=30)%>
+          <%= link_to 'Edit link', edit_page_link_path(@page,link),class:"btn btn-info btn-block " %>
+          <%= link_to 'Delete ', [@page,link],class:"btn btn-danger btn-block", method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
+      <br>
+    <% end %>
+    <% if @page.ad_visible %>
+      <a href="https://play.google.com/store/apps/details?id=com.spartanfox.blocktoidz&hl=en" class="btn btn-primary btn-lg btn-block">Blocktoidz</a>
+      <br>
+    <% end %>
+      </div>
+  </center>

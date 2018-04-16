@@ -1,15 +1,15 @@
 <center>
     <h1>Welcome to listed links</h1>
     <h2>This is a website dedicated to sharing multiple links with complete personalisation of your own free page!</h2>
-    <p>Checkout my free games on the
+    <h2>Checkout my free games on the
       <a href="https://play.google.com/store/apps/details?id=com.spartanfox.blocktoidz&amp;hl=en" class="btn btn-primary">
         Play Store
       </a>
-    </p>
+    </h2>
     <%unless user_signed_in?%>
-      <p>to get started
+      <h2>to get started
         <%= link_to "Sign in", new_user_session_path     , class: "btn btn-default" %> or
         <%= link_to "Sign up", new_user_registration_path, class: "btn btn-default" %>
-         and start customising!</p>
+         and start customising!</h2>
     <%end%>
 </center>
